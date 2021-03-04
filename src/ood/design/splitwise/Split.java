@@ -10,6 +10,11 @@ public abstract class Split {
         this.debtor = Objects.requireNonNull(debtor);
     }
 
+    public Split(User debtor, double amt) {
+       this.debtor = Objects.requireNonNull(debtor);
+       this.amt  = amt;
+    }
+
     public User getDebtor() {
         return debtor;
     }

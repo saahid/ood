@@ -3,9 +3,9 @@ package ood.design.splitwise;
 import java.util.List;
 import java.util.Objects;
 
-public class EqualSplitExpense extends Expense {
+public class PercentageSplitExpense extends Expense {
 
-    public EqualSplitExpense(ExpenseDetails expenseDetails, List<Split> splits) {
+    public PercentageSplitExpense(ExpenseDetails expenseDetails, List<Split> splits) {
         super(expenseDetails);
         this.splits = Objects.requireNonNull(splits);
         this.validate();
@@ -17,7 +17,7 @@ public class EqualSplitExpense extends Expense {
             throw new IllegalSplitException("Number of splits is 0");
 
         for (Split split : splits) {
-            if (!(split instanceof EqualSplit)) {
+            if (!(split instanceof PercentageSplit)) {
                 final String message = String.format("Illegal split object: %s", split);
                 throw new IllegalSplitException(message);
             }
@@ -27,8 +27,9 @@ public class EqualSplitExpense extends Expense {
         User creditor = details.getCreditor();
         final double totalExpense = details.getTotalExpense();
         final int noOfSplits = 1 + splits.size();
-        double splitAmt = totalExpense / noOfSplits;
         for (Split split : splits) {
+            PercentageSplit percentageSplit = (PercentageSplit) split;
+            double splitAmt = percentageSplit.getPercentage() * totalExpense;
             split.setAmt(splitAmt);
         }
     }
