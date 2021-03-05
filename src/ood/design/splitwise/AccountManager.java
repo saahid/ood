@@ -28,7 +28,7 @@ public class AccountManager {
             double credit = borrowerSheet.getOrDefault(lender, 0.0);
             borrowerSheet.put(lender, credit - amt);
         } else {
-            borrowerSheet.put(borrower, -amt);
+            borrowerSheet.put(lender, -amt);
         }
     }
 

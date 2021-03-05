@@ -24,12 +24,10 @@ public class PercentageSplitExpense extends Expense {
         }
         ExpenseDetails details = this.getExpenseDetails();
         List<Split> splits = this.getSplits();
-        User creditor = details.getCreditor();
         final double totalExpense = details.getTotalExpense();
-        final int noOfSplits = 1 + splits.size();
         for (Split split : splits) {
             PercentageSplit percentageSplit = (PercentageSplit) split;
-            double splitAmt = percentageSplit.getPercentage() * totalExpense;
+            double splitAmt = percentageSplit.getPercentage() * totalExpense / 100;
             split.setAmt(splitAmt);
         }
     }

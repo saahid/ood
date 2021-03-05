@@ -19,7 +19,7 @@ public class SplitwiseService {
             default:
                 return;
         }
-
+        this.processExpense(expense);
     }
 
     public void processExpense(Expense expense) {
